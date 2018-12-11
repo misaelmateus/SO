@@ -153,7 +153,61 @@ extern gen_int_handler();
 /*                                                                          */
 /****************************************************************************/
 
+typedef struct Pagina{
+	int id;
+	struct Pagina *next;
+	struct Pagina *prev;
+}Pagina;
 
+typedef struct Fila{
+	int tamanho;
+	Pagina *inicio;
+	Pagina *fim;
+}Fila;
+
+Fila PTFila;
+
+Pagina *newPage(int id){
+  Pagina *page = (Pagina *)malloc(sizeof(Pagina));
+  if( page == NULL)
+      exit(EXIT_FAILURE);
+  page->id = id;
+  return page;
+}
+
+void insereFrame(int id){
+    Pagina *page = newPage(id);
+    if(PTFila.tamanho == 0){ // se a fila estiver vazia faz o nó ser o primeiro, onde o inicio e fim aponta para o mesmo no
+		page->next = page;
+		page->prev = page;
+		PTFila.inicio = page; // faz o inicio apontar para o novo nó
+		PTFila.fim = page; // faz o fim apontar para o novo nó
+		PTFila.tamanho=1;
+	}else{ // se a fila tiver pelo menos um elemento então vou fazer apenas o novo nó apontar para o inicio e o apontar para o penultimo
+		page->next = PTFila.inicio; // faz o proximo do novo nó apontar para o inicio
+		page->prev = PTFila.fim; // faz o anterior do novo nó apontar para o fim
+		page->next->prev = page; // faz inicio apontar para o novo fim
+		page->prev->next = page;  // faz o antigo fim apontar para o novo nó
+		PTFila.fim = page; // faz o novo nó se tornar o fim
+		PTFila.tamanho++; // aumenta o tamanho da fila
+	}
+}
+
+int removeFrame(){
+	Pagina *page;
+	page = PTFila.inicio;
+	if( PTFila.tamanho == 1){
+		PTFila.fim = NULL;
+		PTFila.inicio = NULL;
+		PTFila.tamanho = 0;
+	}else{
+		page->prev->next = page->next; // faz o ultimo elemento apontar para o proximo do inicio
+		page->next->prev = page->prev; // faz proximo do inicio apontar para o fim
+		PTFila.inicio = page->next; // faz o inicio da fila ser o proximo do inicio
+		PTFila.tamanho--;
+	}
+	return page->id;
+}
 
 
 
