@@ -258,6 +258,13 @@ PCB *pcb;
 }
 
 
+void page_fault(PCB *pcb, int page_id){
+    Int_Vector.cause = pagefault;  // interrupção causada por falta de página 
+    Int_Vector.page_id = page_id; // id da pagina que não foi referenciada na memória física
+    Int_Vector.pcb = pcb; // processo 
+    gen_int_handler();  //suspende o processo atual e transfere o controle para o módulo PAGEINT. USADO PARA SIMULAR FALTA DE PAGINA
+}
+
 
 void get_page(pcb,page_id)
 PCB *pcb;
