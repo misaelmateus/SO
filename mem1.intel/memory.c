@@ -211,9 +211,16 @@ int removeFrame(){
 
 
 
-void memory_init()
+void memory_init() // serve para iniciar as estruturas que serão utilizadas
 {
-
+	int i=0;
+	while( i < MAX_FRAME){ // Frames não referenciados recentemente... Bit R com 0
+	  Frame_Tbl[i].hook = (int *)malloc(sizeof(int));
+	  if(Frame_Tbl[i].hook == NULL)
+	       exit(EXIT_FAILURE);
+	  *(Frame_Tbl[i].hook) = 0;
+	  i++;
+	}
 }
 
 
