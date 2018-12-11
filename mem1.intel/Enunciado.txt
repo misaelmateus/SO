@@ -1,0 +1,42 @@
+Sistemas Operacionais 1
+
+Trabalho de Programação - Módulo de memória
+
+Data da Entrega: 12/12/2018
+Peso deste trabalho: 10
+Problema de programação
+
+
+Este trabalho PODERÁ ser resolvido em por até três pessoas, mas a avaliação e a submissão serão sempre individuais
+Neste trabalho, você implementará o módulo MEMORY do ambiente OSP. Você deverá implementar uma política de fetch que 
+realize paginação estritamente sobre demanda, ou seja, sem pré-paginação. Para a política de troca, você deverá 
+implementar o algoritmo de "segunda chance". Você deverá implementar a otimização do "bit sujo" (modificado) para 
+evitar escrever páginas não modificadas para o armazenamento secundário.
+Você implementará as funções memory_init, deallocate, get_page, lock_page, unlock_page, refer, start_cost e prepage
+no final do arquivo memory.c.
+Os parâmetros de simulação serão colocados no respectivos diretórios. Você deverá testar com parâmetros de referência
+de memória tanto local como random.
+
+As estatísticas interessantes são:
+· Número de páginas swapped in/out (é o parâmetro mais importante para este trabalho)
+· Tempo de turnaround
+· Tempo de espera
+· Throughput.
+
+Compare os seus resultados com os gerados pelo sistema (programa OSP.demo)
+Não se esqueça de colocar o seu nome e login no fonte. Inclua também os comentários no seu arquivo fonte com uma descrição das suas estratégias de fetch e troca, e uma explicação das estatísticas obtidas.  
+
+Subissão:
+
+Caso esteja usando a máquina virtual, execute o script hand_in e envie os arquivos gerados no dietório submissions 
+como um arquivo .tar no moodle.
+
+Você deverá rodar o seu programa utilizando os arquivos de parâmetros par.high, par.low e par.trace disponível no 
+moodle ou no diretório  do servidor ~osp/mem.servidor.
+
+O programa fonte, o arquivo com a comparação dos resultados e mais os resultados das 3 execuções deverão ser submetidos 
+em um arquivo único ao moodle.
+
+Caso o trabalho tenha sido feito por mais de uma pessoa, CADA aluno deverá submeter a sua cópia. Os nomes dos autores 
+devem estar como comentário no início de cada arquivo memory.c, sendo que quem fez a submissão deverá ter o primeiro nome.
+A nota somente será obtida após a apresentação individual do trabalho.
