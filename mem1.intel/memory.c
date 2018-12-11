@@ -209,7 +209,16 @@ int removeFrame(){
 	return page->id;
 }
 
-
+int segundaChance(){
+    int page_id = removeFrame();
+    while( *(Frame_Tbl[page_id].hook) != 0 || Frame_Tbl[page_id].lock_count > 0){
+      *(Frame_Tbl[page_id].hook)  = 0;
+      insereFrame(page_id);
+      page_id = removeFrame();
+    }
+    *(Frame_Tbl[page_id].hook) = 1;
+    return page_id;
+}
 
 void memory_init() // serve para iniciar as estruturas que serão utilizadas
 {
