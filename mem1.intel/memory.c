@@ -295,7 +295,19 @@ void refer(logic_addr,action)
 int logic_addr;
 REFER_ACTION action;
 {
+    int page_id = logic_addr / PAGE_SIZE; // indice na tabela de páginas
+    PCB *pcb = PTBR->pcb; //processo da página referenciada
 
+    PAGE_ENTRY *page = pcb->page_tbl->page_entry + page_id // pagina referenciada;
+
+    if(!page->valid) // caso a pagina esteja fora da memória
+        pageFault(pcb, page_id); // chama função que faz de páginas swap na memória
+
+    *Frame_Tbl[page->frame_id].hook = 1; // atualiza campo de referencia
+
+    // se for ação de armazenar ativo o bit de dirty no frame
+    if(action == store) 
+        Frame_Tbl[page->frame_id].dirty = true;
 }
 
 /* end of module */
