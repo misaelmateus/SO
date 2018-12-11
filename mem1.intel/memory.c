@@ -228,7 +228,8 @@ void memory_init() // serve para iniciar as estruturas que serão utilizadas
 void prepage(pcb)
 PCB *pcb;
 {
-
+// como é por demanda então não precisa implementar já que o manual diz que por default eh por demanda se tiver em branco
+// implementar so se a prepaging estiver implementada
 }
 
 
